@@ -1,43 +1,61 @@
-import directedGraph.py
+from directedGraph import*
 class undirectedGraph:
     def __init__(self):
         self.directedGraph = directedGraph()
     def insertVertex(self,vertexName):
-        if self.vertices.contains(vertexName) == False:
-            self.vertices.insert(vertexName,True)
-            self.edges.insert(vertexName,HashTable())
+        self.directedGraph.insertVertex(vertexName)
     def removeVertex(self,vertexName):
-        if self.vertices.contains(vertexName) == True:
-            self.vertices.remove(vertexName)
+        self.directedGraph.removeVertex(vertexName)
     def containsVertex(self,vertexName):
-        return self.vertices.contains(vertexName)
+        return self.directedGraph.containsVertex(vertexName)
     def getVertices(self):
-        return self.vertices.getKeys()
+        return self.directedGraph.getVertices()
     def insertEdge(self,src,dest,label,weight):
-        if self.vertices.contains(src) == False:
-            raise ValueError("SRC key not found")
-        if self.vertices.contains(dest) == False:
-            raise ValueError("DEST key not found")
-        if self.edges.get(src).contains(dest) == True:
-            raise ValueError("Edge already exits from",src,"to",dest)
-        else:
-            self.edges.get(src).insert(Edge(src,dest,label,weight))
+        self.directedGraph.insertEdge(src,dest,label,weight)
+        self.directedGraph.insertEdge(dest,src,label,weight)
     def removeEdge(self,src,dest):
-        if self.edges.contains(src) and self.edges.get(src).contains(dest):
-            self.edges.get(src).remove(dest)
-        else:
-            raise ValueError("Edge does not exit from",src,"to",dest)
+        self.directedGraph.removeEdge(src,dest)
+        self.directedGraph.removeEdge(dest,src)
     def containsEdge(self,src,dest):
-        return self.edges.contains(src) and self.edges.get(src).contains(dest):
+        return self.directedGraph.containsEdge(src,dest)
     def getEdge(self,src,dest):
-        if self.edges.contains(src) and self.edges.get(src).contains(dest):
-            return self.edges.get(src).get(dest)
-        else:
-            raise ValueError("Edge does not exit from",src,"to",dest)
+        return self.directedGraph.getEdge(src,dest)
     def getEdges(self):
-        myEdges =[]
-        sources = self.edges.getKeys()
-        for x in range(len(sources)):
-            destinations = self.edges.get(sources[x]).getKeys()
-            for y in range(len(destinations)):
-                myEdges.append(self.edges.get(sources[x]).get(destinations[y]))
+        toReturn = []
+        myEdges = self.directedGraph.getEdges()
+        foundDouble = False
+
+        for x in range(len(myEdges)):
+            foundDouble = False
+            for y in range(len(toReturn)):
+                if (toReturn[y].getSource() == myEdges[x].getDestination()) and (toReturn[y].getDestination() == myEdges[x].getSource()):
+                    foundDouble = True
+                    break
+            if foundDouble == False:
+                toReturn.append(myEdges[x])
+        return toReturn
+
+    def getOutgoingEdges(self,vertexName):
+
+        return self.directedGraph.getOutgoingEdges(vertexName)
+
+    def getIncomingEdges(self,destination):
+        return self.directedGraph.getIncomingEdges(destination)
+
+
+def main():
+    myG = undirectedGraph()
+    myG.insertVertex("A")
+    myG.insertVertex("B")
+    myG.insertVertex("C")
+    myG.insertVertex("D")
+    print(myG.getVertices())
+    myG.insertEdge("A","B","low",12)
+    myG.insertEdge("A","C","low",12)
+    myG.insertEdge("A","D","low",12)
+    print(myG.getEdge("B","A"))
+    print(myG.getEdges())
+    print(myG.getIncomingEdges("A"))
+
+
+main()

@@ -94,14 +94,18 @@ class HashTable:
         return self.table[index].get(key)
     def contains(self,key):
         index = Hash(key,self.capacity)
-        return self.table[index].contains(key)
+        if self.table[index] != None:
+            return self.table[index].contains(key)
+
+        return False
 
 
 
     def getKeys(self):
         all_keys = []
         for i in range(self.capacity):
-            all_keys+=self.table[i].getKeys()
+            if self.table[i]!= None:
+                all_keys+=self.table[i].getKeys()
         return all_keys
 
     def ensureCapacity(self):
@@ -121,4 +125,3 @@ class HashTable:
 
         self.table = newTable
         self.capacity = newCapactiy
-    
