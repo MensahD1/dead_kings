@@ -1,4 +1,5 @@
 from directedGraph import*
+
 class undirectedGraph:
     def __init__(self):
         self.directedGraph = directedGraph()
@@ -41,21 +42,3 @@ class undirectedGraph:
 
     def getIncomingEdges(self,destination):
         return self.directedGraph.getIncomingEdges(destination)
-
-
-def main():
-    myG = undirectedGraph()
-    myG.insertVertex("A")
-    myG.insertVertex("B")
-    myG.insertVertex("C")
-    myG.insertVertex("D")
-    print(myG.getVertices())
-    myG.insertEdge("A","B","low",12)
-    myG.insertEdge("A","C","low",12)
-    myG.insertEdge("A","D","low",12)
-    print(myG.getEdge("B","A"))
-    print(myG.getEdges())
-    print(myG.getIncomingEdges("A"))
-
-
-main()

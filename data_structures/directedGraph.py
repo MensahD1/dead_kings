@@ -8,7 +8,6 @@ class Edge:
         self.label = label
         self.weight = weight
 
-
     def getLabel(self):
         return self.label
 
@@ -20,9 +19,6 @@ class Edge:
 
     def getWeight(self):
         return self.weight
-
-
-
 
 class directedGraph:
     def __init__(self):
