@@ -1,7 +1,8 @@
 class StatInterface:
-    def __init__(self,health,furor,defense,shred,speed,accuracy):
+    def __init__(self,health,power,furor,defense,shred,speed,accuracy):
         self.health = health
         self.furor = furor
+        self.power = power
         self.defense = defense
         self.shred = shred
         self.speed = speed
@@ -37,11 +38,29 @@ class StatInterface:
         print("Offerings:",self.offerings)
         print("Health:",self.health)
         print("Furor:",self.furor)
+        print("Power:",self.power)
         print("Defense:",self.defense)
         print("Shred:",self.shred)
         print("Speed:",self.speed)
         print("Accuracy:",self.accuracy)
+        print("Crit Chance:",self.crit)
         print("---------------")
+    def applyMitigations(self,damage,enemyShred):
+        #takes in the damage being dealt and enemy shred
+        #returns damage to be done
+        if enemyShred = True:
+            return damage
+        return damage - (1.5(self.defense + self.defenseBoost) - self.shred)
+    def applyStatChange(self,myDict):
+        self.maxHealth+= myDict[0]
+        self.maxFuror+= myDict[1]
+        self.power+= myDict[2]
+        self.defense+= myDict[3]
+        self.shred+= myDict[4]
+        self.speed+= myDict[5]
+        self.accuracy+= myDict[6]
+        self.crit+= myDict[7]
+
 
     #Getters------------------------
     def getHealth(self):
@@ -50,6 +69,8 @@ class StatInterface:
         return self.furor
     def getDefense(self):
         return self.defense
+    def getPower(self):
+        return self.power
     def getShred(self):
         return self.shred
     def getSpeed(self):
@@ -79,10 +100,17 @@ class StatInterface:
     def getMaxFuror(self):
         return self.maxFuror
 
+    #Setters-----------------
     def setHealth(self,value):
          self.health += value
+         if self.health > self.maxHealth:
+             self.health = self.maxHealth
     def setFuror(self,value):
          self.furor += value
+         if self.furor> self.maxFuror:
+             self.furor = self.maxFuror
+    def setPower(self,value):
+        self.power +=value
     def setDefense(self,value):
          self.defense += value
     def setShred(self,value):

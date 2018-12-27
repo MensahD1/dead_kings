@@ -5,6 +5,7 @@ class EffectInterface():
            self.burned = False
            self.invincible = False
            self.bleeding = False
+           self.frozen = False
     def isBurned(self):
         if self.resolveEffect() == False and self.burned == True:
             self.burned = False
@@ -21,9 +22,20 @@ class EffectInterface():
         if self.resolveEffect() == False and self.bleeding == True:
             self.bleeding = False
         return self.bleeding
+    def isFrozen(self):
+        if self.resolveEffect() == False and self.frozen == True:
+            self.frozen = False
+        return self.frozen
 
     def resolveEffect(self):
         #randomly decicdes is persona is still afflicted by status effect
         if random.randchoice([1,0,0,0,0,0,0,0,0,0]) == 1:
             return False
         return True
+
+    def resetCondition(self):
+        self.poisoned = False
+        self.burned = False
+        self.invincible = False
+        self.bleeding = False
+        self.frozen = False
