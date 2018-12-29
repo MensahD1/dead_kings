@@ -23,7 +23,6 @@ class AbilityTree:
     def getAvailablePaths(self,ability):
         return self.tree.getOutgoingEdges()
 
-    #Naviagational Methods
     def getUnlocked(self):
         return self.unlocked
     def getLocked(self):
@@ -64,7 +63,6 @@ class AbilityTree:
 
             if requiredCount == 0:
                 unlockables.append(ability)
-
     def Unlock(self,offerings):
 
         selection = ""

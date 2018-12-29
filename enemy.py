@@ -1,11 +1,9 @@
 from persona import *
-class Archetype(Persona):
-    def __init__(self,name,StatInterface,dialouge,classType,skillTree):
+class Enemy(Persona):
+    def __init__(self,name,StatInterface,dialouge,goldReward,expReward,itemDrops):
         super().__init__(name,StatInterface,dialouge)
-        #self.milestoneDash = milestoneInterface()
-        self.classType = classType
-        self.skillTree = skillTree
-        self.bag = []
+
+
 
     def unlockAbility(self):
         #set offerings value to the return value of the unlock method of skill
