@@ -2,17 +2,17 @@ from persona import *
 class Enemy(Persona):
     def __init__(self,name,StatInterface,dialouge,goldReward,expReward,itemDrops):
         super().__init__(name,StatInterface,dialouge)
+        self.goldReward = goldReward
+        self.expReward = expReward
+        self.itemDrops = itemDrops
 
+    def getRewards(self):
+        return [self.goldReward,self.expReward,self.itemDrops]
 
-
-    def unlockAbility(self):
-        #set offerings value to the return value of the unlock method of skill
-        #the skill tree called on the current number of offerings
-        offerings = self.stats.getOfferings()
-        self.stats.setOfferings(self.skillTree.Unlock(offerings))
-
-
-    def getClass(self):
-        return self.classType
-    def getSupers(self):
-        pass
+    def printProfile(self):
+        print("Enemy Profile")
+        print("Name:",self.name)
+        print("Health:",self.stats.getHealth())
+        print("Gold Reward:",self.goldReward)
+        print("EXP Reward:",self.expReward)
+        print("------------------")

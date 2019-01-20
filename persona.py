@@ -23,7 +23,11 @@ class Persona:
         if self.stats.getHealth() <= 0:
             return True
         return False
-        
+    def enoughFuror(self,cost):
+        if self.stats.getFuror() - cost >= 0:
+            return True
+        return False
+
     def Reset(self):
         self.stats.resetBoosts()
         self.activeEffects.resetCondition()
@@ -44,21 +48,14 @@ class Persona:
         #assign values to variables
         message = self.dialouge.getPhrase()
         power = self.stats.getPower()
-        boost = self.stats.getPowerBoost()
+        powerBoost = self.stats.getPowerBoost()
+
+        shred = self.stats.getShred()
+        shredBoost = self.stats.getShredBoost()
         #check to see if attack will miss
         if self.willMiss() == True:
             message = self.dialouge.getMissPhrase()
             power = 0
             boost = 0
         #return node instance
-        return BattleNode(source,target,message,power + boost,"Attack")
-
-
-    def Dodge(self):
-        pass
-    def Finisher(self):
-        pass
-    def Super(self):
-        pass
-    def Transform(self):
-        pass
+        return BattleNode(source,target,message,[power + powerBoost,shred +shredBoost],"Attack")

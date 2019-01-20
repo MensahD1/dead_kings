@@ -1,6 +1,6 @@
-from directedGraph import *
+from data_structures import *
 from ability import *
-from helpfulFunctions imprt *
+from helpfulFunctions import *
 
 class AbilityTree:
     def __init__(self):
@@ -63,6 +63,28 @@ class AbilityTree:
 
             if requiredCount == 0:
                 unlockables.append(ability)
+
+    def Browse(self):
+        selection = ""
+        while selection != "Quit":
+
+            #define unlockable abilities and make a lst of the names for the user
+            abilites = self.getAbilities()
+            abilites_str = []
+            for ability in unlockables:
+                abilites_str.append(ability.getName())
+
+            #Open up selection for the user
+            print("Select a blessing to learn more.")
+            selection = Select(abilites_str + "Quit",False)
+
+            #make sure selection
+            if selection < len(abilites):
+                unlockables[selection].toString()
+
+            else:
+                selection = "Quit"
+
     def Unlock(self,offerings):
 
         selection = ""
@@ -94,3 +116,16 @@ class AbilityTree:
                 selection = "Quit"
 
         return offerings
+
+    def getUnlockedSupers(self):
+        supers = []
+        for ability in self.unlocked:
+            if ability.getStyle() == "Super":
+                supers.append(ability)
+        return supers
+    def getUnlockedFinishers(self):
+        finishers = []
+        for ability in self.unlocked:
+            if ability.getStyle() == "Finisher":
+                finisher.append(ability)
+        return finishers
